@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册码"
+                android:textSize="16sp"
+                android:id="@+id/tv_regsiter"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_centerVertical="true"
+                android:textColor="#000000" />
+            <com.dawnlightning.msmdebuger.widget.EditUsename
+                android:id="@+id/regsiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_bg"
+                android:inputType="phone"
+                android:textSize="12sp"
+                android:focusable="true"
+                android:hint="请输入注册码"
+                android:maxLength="8"
+                android:numeric="integer"
+                android:singleLine="true"
+                android:layout_toRightOf="@+id/tv_regsiter"
+                android:layout_marginLeft="20dp"
+                />
+            <Button
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/regsiter"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="注册"
+                android:id="@+id/bt_register"
+                android:background="@drawable/login_bg_press"
+                android:textColor="#010900"
+                android:textSize="12sp"
+
+               />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地址"
+                android:textSize="16sp"
+                android:id="@+id/textView"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_centerVertical="true"
+                android:textColor="#000000" />
+            <com.dawnlightning.msmdebuger.widget.EditUsename
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_bg"
+                android:textSize="12sp"
+                android:focusable="true"
+                android:hint="@string/address"
+                android:singleLine="true"
+                android:maxLength="10"
+                android:layout_toRightOf="@+id/textView"
+                android:layout_marginLeft="20dp"
+                />
+            <Button
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="设置"
+                android:id="@+id/bt_address"
+                android:background="@drawable/login_bg_press"
+                android:textColor="#010900"
+                android:textSize="12sp"
+
+                />
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="读次数"
+                android:textSize="16sp"
+                android:id="@+id/tv_times"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="#000000" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@id/tv_times"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="16sp"
+                android:id="@+id/tv_times_true"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="#000000" />
+            <SeekBar
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/tv_times_true"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:progress="1"
+                android:layout_centerHorizontal="true"
+                android:textColor="#010900"
+                android:textSize="30px"
+                android:max="99"
+                android:id="@+id/sb_light_speed"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <EditText
+                android:id="@+id/context"
+               android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+               android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="start"
+                android:hint="@string/command"
+                android:textSize="16sp"
+                android:background="@drawable/edittext_bg"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="亮选择"
+                android:textSize="16sp"
+                android:id="@+id/tv_light"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="#000000" />
+
+            <RadioGroup
+                android:id="@+id/rg_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/tv_light"
+                android:layout_marginTop="5dp"
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="蓝"
+                    android:id="@+id/rb_blue"
+                    android:layout_marginRight="20dp"
+                    android:checked="true"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="橙"
+                    android:id="@+id/rb_oranger"
+                    android:layout_marginRight="20dp"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="黄"
+                    android:id="@+id/rb_yellow"
+                    android:layout_marginRight="20dp"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="红"
+                    android:id="@+id/rb_reb" />
+            </RadioGroup>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/login"
+                android:id="@+id/send"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/login_bg_press"
+                android:textColor="#010900"
+                android:textSize="16sp"
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rl_toolbar"
+        >
+
+        <com.dawnlightning.msmdebuger.widget.EditUsename
+            android:id="@+id/phone"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_bg"
+            android:inputType="phone"
+            android:textSize="16sp"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="@string/phone"
+            android:maxLength="11"
+            android:numeric="integer"
+            android:singleLine="true"
+            android:layout_centerVertical="true"
+            />
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="添加"
+            android:id="@+id/add"
+            android:background="@drawable/login_bg_press"
+            android:textColor="#010900"
+            android:textSize="12sp"
+            />
+        <Button
+            android:visibility="gone"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/add"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:text="选择"
+            android:id="@+id/select"
+            android:background="@drawable/login_bg_press"
+            android:textColor="#010900"
+            android:textSize="12sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_toolbar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="至"
+            android:textSize="16sp"
+            android:id="@+id/tv_to"
+            android:gravity="left"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:textColor="#000000" />
+        <me.gujun.android.taggroup.TagGroup
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_to"
+            android:id="@+id/tag_group"
+            style="@style/TagGroup" />
+
+    </RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        ></android.support.v4.view.ViewPager>
+    <include layout="@layout/toolbar"/>
+</LinearLayout>
