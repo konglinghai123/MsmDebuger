@@ -14,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.dawnlightning.msmdebuger.ContactActivity;
 import com.dawnlightning.msmdebuger.MainActivity;
 import com.dawnlightning.msmdebuger.R;
 import com.dawnlightning.msmdebuger.Utils.Mobile;
@@ -36,14 +39,16 @@ import butterknife.OnClick;
  */
 public class PhoneFragment extends Fragment {
     @Bind(R.id.add_phone)
-    EditUsename addPhone;
+    EditText addPhone;
     @Bind(R.id.add)
-    Button add;
+    TextView add;
+    @Bind(R.id.select)
+    TextView select;
     @Bind(R.id.listphone)
     ExpandListView listphone;
     @Bind(R.id.sure)
     Button sure;
-
+    public final static int REQUEST_CODE_FROM_FRAGMENT=5;
     PhoneAdapter adapter;
 
     private MsgSender sender;
@@ -71,15 +76,15 @@ public class PhoneFragment extends Fragment {
         adapter = new PhoneAdapter(getActivity());
         listphone.setAdapter(adapter);
 
-        addPhone.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                startActivityForResult(intent, 1);
-                return false;
-            }
-        });
+//        addPhone.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                // TODO Auto-generated method stub
+//                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+//                startActivityForResult(intent, 1);
+//                return false;
+//            }
+//        });
         return view;
     }
 
@@ -89,7 +94,7 @@ public class PhoneFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.add,R.id.sure})
+    @OnClick({R.id.add,R.id.sure,R.id.select})
     public void onClick(View view) {
 
             switch (view.getId()) {
@@ -112,6 +117,11 @@ public class PhoneFragment extends Fragment {
                     ArrayList<String> phone=mainActivity.phonelist;
                     sender.send(phone,builder.SetPhone(adapter.getlist()));
                     break;
+                case R.id.select:
+                    Intent i=new Intent();
+                    i.setClass(getActivity(),ContactActivity.class);
+                    startActivityForResult(i,REQUEST_CODE_FROM_FRAGMENT);
+                    break;
             }
 
 
@@ -120,78 +130,40 @@ public class PhoneFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode)
+        switch(resultCode)
         {
-
-            case (1) :
+            case (2) :
             {
+                if (requestCode==REQUEST_CODE_FROM_FRAGMENT){
+                    ArrayList<String> list=data.getStringArrayListExtra("phonelist");
+                    if (list!=null){
+                        if (list.size()<=5){
+                            for (int i=0;i<list.size();i++){
+                                if (Mobile.isMobileNO(list.get(i))){
+                                    adapter.add(list.get(i));
+                                }
 
-                if (resultCode == Activity.RESULT_OK)
-                {
+                            }
+                        }else{
+                            for (int i=0;i<5;i++){
+                                if (Mobile.isMobileNO(list.get(i))){
+                                    adapter.add(list.get(i));
+                                }
+                            }
+                            mainActivity.TosatShow("所选号码不能超过5");
+                        }
 
-                    Uri contactData = data.getData();
-
-                    Cursor c = mainActivity.managedQuery(contactData, null, null, null, null);
-
-                    c.moveToFirst();
-
-                    String phoneNum=this.getContactPhone(c);
-                    addPhone.setText(phoneNum.replaceAll(" ",""));
+                        adapter.notifyDataSetChanged();
+                    }
 
                 }
 
                 break;
-
             }
 
         }
     }
 
-    //获取联系人电话
-    private String getContactPhone(Cursor cursor)
-    {
 
-        int phoneColumn = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER);
-        int phoneNum = cursor.getInt(phoneColumn);
-        String phoneResult="";
-        //System.out.print(phoneNum);
-        if (phoneNum > 0)
-        {
-            // 获得联系人的ID号
-            int idColumn = cursor.getColumnIndex(ContactsContract.Contacts._ID);
-            String contactId = cursor.getString(idColumn);
-            // 获得联系人的电话号码的cursor;
-            Cursor phones = mainActivity.getContentResolver().query(
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null,
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID+ " = " + contactId,
-                    null, null);
-            //int phoneCount = phones.getCount();
-            //allPhoneNum = new ArrayList<String>(phoneCount);
-            if (phones.moveToFirst())
-            {
-                // 遍历所有的电话号码
-                for (;!phones.isAfterLast();phones.moveToNext())
-                {
-                    int index = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                    int typeindex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
-                    int phone_type = phones.getInt(typeindex);
-                    String phoneNumber = phones.getString(index);
-                    switch(phone_type)
-                    {
-                        case 2:
-                            phoneResult=phoneNumber;
-                            break;
-                    }
-                    //allPhoneNum.add(phoneNumber);
-                }
-                if (!phones.isClosed())
-                {
-                    phones.close();
-                }
-            }
-        }
-        return phoneResult;
-    }
 
 }

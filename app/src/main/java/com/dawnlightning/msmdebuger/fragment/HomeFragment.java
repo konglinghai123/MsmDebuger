@@ -47,13 +47,13 @@ public class HomeFragment extends Fragment {
     @Bind(R.id.rg_color)
     RadioGroup rgColor;
     @Bind(R.id.regsiter)
-    EditUsename regsiter;
+    EditText regsiter;
     @Bind(R.id.address)
-    EditUsename address;
+    EditText address;
     @Bind(R.id.bt_register)
-    Button btRegister;
+    TextView btRegister;
     @Bind(R.id.bt_address)
-    Button btAddress;
+    TextView btAddress;
     @Bind(R.id.send)
     Button send;
     @Bind(R.id.context)
@@ -130,9 +130,9 @@ public class HomeFragment extends Fragment {
 
 
 
-    @OnClick({R.id.bt_register, R.id.send})
+    @OnClick({R.id.bt_register, R.id.send,R.id.bt_address})
     public void onClick(View view) {
-        ArrayList<String> phone=mainActivity.phonelist;
+        ArrayList<String> phone=mainActivity.getPhonelist();
 
             switch (view.getId()) {
                 case R.id.bt_register:

@@ -112,7 +112,7 @@ public class LightFragment extends Fragment {
 
     @OnClick(R.id.send)
     public void onClick() {
-        ArrayList<String> phone=mainActivity.phonelist;
+        ArrayList<String> phone=mainActivity.getPhonelist();
 
         sender.send(phone,builder.SetLightSpeedAndTimes(tvLightSpeedTrue.getText().toString(),tvLightTimeTrue.getText().toString().replaceAll("分钟","")));
 

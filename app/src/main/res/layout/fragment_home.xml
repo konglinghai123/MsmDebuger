@@ -11,100 +11,132 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+
         android:paddingTop="5dp"
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ed_comment_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/regsiter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:maxLength="8"
+                    android:hint="请输入注册码"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#DCDCDC"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toLeftOf="@+id/bt_register"
+                   />
+
+                <TextView
+                    android:id="@+id/bt_register"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/btn_selector"
+                    android:layout_height="match_parent"
+                    android:text="注册"
+                    android:padding="6dp"
+                    android:layout_margin="3dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/nomalGray"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:clickable="true"/>
+            </RelativeLayout>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ed_comment_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="请输入主机地址"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#DCDCDC"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toLeftOf="@+id/bt_address"
+                    />
+
+                <TextView
+                    android:id="@+id/bt_address"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/btn_selector"
+                    android:layout_height="match_parent"
+                    android:text="设置"
+                    android:padding="6dp"
+                    android:layout_margin="3dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/nomalGray"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:clickable="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="注册码"
-                android:textSize="16sp"
-                android:id="@+id/tv_regsiter"
-                android:gravity="center_horizontal|center_vertical"
-                android:layout_centerVertical="true"
-                android:textColor="#000000" />
-            <com.dawnlightning.msmdebuger.widget.EditUsename
-                android:id="@+id/regsiter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_bg"
-                android:inputType="phone"
-                android:textSize="12sp"
-                android:focusable="true"
-                android:hint="请输入注册码"
-                android:maxLength="8"
-                android:numeric="integer"
-                android:singleLine="true"
-                android:layout_toRightOf="@+id/tv_regsiter"
-                android:layout_marginLeft="20dp"
-                />
-            <Button
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/regsiter"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:text="注册"
-                android:id="@+id/bt_register"
-                android:background="@drawable/login_bg_press"
-                android:textColor="#010900"
-                android:textSize="12sp"
-
-               />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="地址"
-                android:textSize="16sp"
-                android:id="@+id/textView"
-                android:gravity="center_horizontal|center_vertical"
-                android:layout_centerVertical="true"
-                android:textColor="#000000" />
-            <com.dawnlightning.msmdebuger.widget.EditUsename
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_bg"
-                android:textSize="12sp"
-                android:focusable="true"
-                android:hint="@string/address"
-                android:singleLine="true"
-                android:maxLength="10"
-                android:layout_toRightOf="@+id/textView"
-                android:layout_marginLeft="20dp"
-                />
-            <Button
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:text="设置"
-                android:id="@+id/bt_address"
-                android:background="@drawable/login_bg_press"
-                android:textColor="#010900"
-                android:textSize="12sp"
-
-                />
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -143,7 +175,10 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp"
             >
             <EditText
                 android:id="@+id/context"
@@ -217,7 +252,10 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp"
             >
             <Button
 

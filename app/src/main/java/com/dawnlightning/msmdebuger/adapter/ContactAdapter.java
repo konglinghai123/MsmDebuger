@@ -1,6 +1,7 @@
 package com.dawnlightning.msmdebuger.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.dawnlightning.msmdebuger.bean.Contact;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  * 作者：Administrator on 2016/10/7 02:13
@@ -25,9 +27,10 @@ public class ContactAdapter extends BaseAdapter{
     private LayoutInflater layoutInflater;
     private ViewHolder holder;
     private ArrayList<Contact> selectDatas=new ArrayList<>();
+    HashMap<Integer, Boolean> state = new HashMap<Integer,Boolean>();
     public ContactAdapter(ArrayList<Contact> datas, Context context){
         this.datas=datas;
-        Collections.sort(datas);
+        Collections.sort(this.datas);
         this.layoutInflater=LayoutInflater.from(context);
     }
     @Override
@@ -46,26 +49,46 @@ public class ContactAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView==null){
-            holder=new ViewHolder();
-            convertView=layoutInflater.inflate(R.layout.item_list_contact,null);
-            holder.Catalog= (TextView) convertView.findViewById(R.id.contact_catalog);
-            holder.Name= (TextView) convertView.findViewById(R.id.contact_title);
-            holder.Phone= (TextView) convertView.findViewById(R.id.contact_phone);
-            holder.isCheck= (CheckBox) convertView.findViewById(R.id.contact_ischeck);
-            holder.Line=(TextView)convertView.findViewById(R.id.contact_line); 
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
+        if (convertView==null) {
+            holder = new ViewHolder();
+            convertView = layoutInflater.inflate(R.layout.item_list_contact, null);
+            holder.Catalog = (TextView) convertView.findViewById(R.id.contact_catalog);
+            holder.Name = (TextView) convertView.findViewById(R.id.contact_title);
+            holder.Phone = (TextView) convertView.findViewById(R.id.contact_phone);
+            holder.isCheck = (CheckBox) convertView.findViewById(R.id.contact_ischeck);
+            holder.Line = (TextView) convertView.findViewById(R.id.contact_line);
+
+            holder.isCheck.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox checkBox=(CheckBox)v;
+                    if (checkBox.isChecked()){
+                        selectContact(position,checkBox.isChecked());
+                    }else{
+                        selectContact(position,checkBox.isChecked());
+                    }
+                }
+            });
+            //Log.e("Tag",String.valueOf(item.isCheck()+"["+String.valueOf(position))+"]");
+
             convertView.setTag(holder);
         }else{
-            convertView.getTag();
+            holder = (ViewHolder)convertView.getTag();
         }
-       final Contact item=datas.get(position);
+        final Contact item=datas.get(position);
 
         if (item!=null){
             //如果是第0个那么一定显示#号
             if (position == 0) {
                 holder.Catalog.setVisibility(View.VISIBLE);
-                holder.Catalog.setText("#");
+                if (item.getFirstChar()=='A'){
+                    holder.Catalog.setText("A");
+                }else{
+                    holder.Catalog.setText("#");
+                }
+
                 holder.Line.setVisibility(View.VISIBLE);
             } else {
 
@@ -80,21 +103,24 @@ public class ContactAdapter extends BaseAdapter{
                     holder.Line.setVisibility(View.GONE);
                 }
             }
+            holder.isCheck.setChecked(state.get(position)==null? false : true);
             holder.Name.setText(item.getName());
             holder.Phone.setText(item.getNumber());
-            holder.isCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        selectDatas.add(item);
-                    }else{
-                        selectDatas.remove(item);
-                    }
-                }
-            });
+
         }
 
         return convertView;
+    }
+    public void selectContact(int position,boolean isChecked){
+        Contact item=datas.get(position);
+        if (isChecked){
+            state.put(position, isChecked);
+            selectDatas.add(item);
+        }else{
+            state.remove(position);
+            selectDatas.remove(item);
+        }
+
     }
    class ViewHolder{
        public TextView Catalog;

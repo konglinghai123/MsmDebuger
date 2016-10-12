@@ -1,62 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/rl_toolbar"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
         >
 
-        <com.dawnlightning.msmdebuger.widget.EditUsename
-            android:id="@+id/phone"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bg"
-            android:inputType="phone"
-            android:textSize="16sp"
-            android:ems="10"
-            android:focusable="true"
-            android:hint="@string/phone"
-            android:maxLength="11"
-            android:numeric="integer"
-            android:singleLine="true"
-            android:layout_centerVertical="true"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/ed_comment_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+
+            >
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/phone"
+                android:maxLength="11"
+                android:numeric="integer"
+                android:singleLine="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="16sp" />
+
+
+
+            <TextView
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:background="@drawable/btn_selector"
+                android:layout_height="match_parent"
+                android:text="添加"
+                android:padding="6dp"
+                android:layout_margin="3dp"
+                android:textSize="16sp"
+                android:textColor="@color/nomalGray"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_toLeftOf="@+id/tv_line"
             />
-        <Button
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="添加"
-            android:id="@+id/add"
-            android:background="@drawable/login_bg_press"
-            android:textColor="#010900"
-            android:textSize="12sp"
-            />
-        <Button
-            android:visibility="gone"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/add"
-            android:layout_width="48dp"
-            android:layout_height="36dp"
-            android:text="选择"
-            android:id="@+id/select"
-            android:background="@drawable/login_bg_press"
-            android:textColor="#010900"
-            android:textSize="12sp"
-            />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_line"
+                android:layout_centerVertical="true"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#DCDCDC"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toLeftOf="@+id/select"
+                />
+
+            <TextView
+                android:id="@+id/select"
+                android:layout_width="wrap_content"
+                android:background="@drawable/btn_selector"
+                android:layout_height="match_parent"
+                android:text="选择"
+                android:padding="6dp"
+                android:layout_margin="3dp"
+                android:textSize="16sp"
+                android:textColor="@color/nomalGray"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:clickable="true"/>
+        </RelativeLayout>
+
     <RelativeLayout
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
@@ -80,7 +108,7 @@
             style="@style/TagGroup" />
 
     </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.Toolbar>
     <android.support.v4.view.ViewPager
         android:id="@+id/main"

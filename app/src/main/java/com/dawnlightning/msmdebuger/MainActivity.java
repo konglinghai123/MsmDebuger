@@ -14,8 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,19 +53,21 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.mine)
     TextView mine;
     FragmentAdapter adapter;
-    public static EditUsename phone;
-    public static TagGroup phonegroup;
+    public EditText phone;
+    public TagGroup phonegroup;
     ArrayList<Fragment> fragmentList= new ArrayList<>();
-    String username,usernumber;
-    private Button selectnumber;
-    private Button addnumber;
-    public static  ArrayList<String> phonelist=new ArrayList<>();
+    private TextView selectnumber;
+    private TextView addnumber;
+    public  ArrayList<String> phonelist=new ArrayList<>();
     public final  static int SELECTPHONEFROMCONTACT=1;
     public MainActivity(){
         fragmentList.add(new HomeFragment());
         fragmentList.add(new LightFragment());
         fragmentList.add(new PhoneFragment());
         fragmentList.add(new MineFragment());
+    }
+    public ArrayList<String> getPhonelist(){
+        return this.phonelist;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         adapter=new FragmentAdapter(getSupportFragmentManager(),fragmentList);
         main.setAdapter(adapter);
+        main.setOffscreenPageLimit(3);
         main.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -108,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         toolbar.setTitleTextColor(getResources().getColor(R.color.jianshu));
-        phone=(EditUsename) toolbar.findViewById(R.id.phone);
+        phone=(EditText) toolbar.findViewById(R.id.phone);
         phonegroup=(TagGroup)toolbar.findViewById(R.id.tag_group);
-        selectnumber=(Button)toolbar.findViewById(R.id.select);
-        addnumber=(Button)toolbar.findViewById(R.id.add);
+        selectnumber=(TextView) toolbar.findViewById(R.id.select);
+        addnumber=(TextView) toolbar.findViewById(R.id.add);
         addnumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,21 +149,34 @@ public class MainActivity extends AppCompatActivity {
         trends.setSelected(true);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        phonegroup.setTags(phonelist);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode)
+        switch(resultCode)
         {
-            case (1) :
+            case (2) :
             {
-                ArrayList<String> list=data.getStringArrayListExtra("phonelist");
-                for (int i=0;i<list.size();i++){
-                    if (Mobile.isMobileNO(list.get(i))){
-                        phonelist.add(list.get(i));
-                    }
+                if (requestCode==SELECTPHONEFROMCONTACT){
+                    ArrayList<String> list=data.getStringArrayListExtra("phonelist");
+                    if (list!=null){
+                        for (int i=0;i<list.size();i++){
+                            if (Mobile.isMobileNO(list.get(i))){
+                                phonelist.add(list.get(i));
+                            }
 
+                        }
+                        phonegroup.setTags(phonelist);
+                    }
                 }
-                phonegroup.setTags(phonelist);
+
+
                 break;
             }
 
@@ -200,5 +218,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void TosatShow(String msg){
         Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(false);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

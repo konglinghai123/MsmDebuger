@@ -27,6 +27,7 @@ public class Contact implements Comparable<Contact> {
     private String pinyin;
     private char firstChar;
 
+
     public String getNumber() {
         return number;
     }

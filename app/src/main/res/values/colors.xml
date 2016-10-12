@@ -8,4 +8,7 @@
     <color name="main_toolbar_color">#fff</color>
     <color name="jianshu">#d96f5d</color>
     <color name="white">#ffffff</color>
+    <color name="nomalGray">#838B83</color>
+    <drawable name="lightgrey">#DCDCDC</drawable>
+    <drawable name="nocolor">#00ffffff</drawable>
 </resources>
