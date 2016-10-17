@@ -19,7 +19,7 @@
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
@@ -30,9 +30,10 @@
             android:layout_height="wrap_content"
             android:text="警报"
             android:id="@+id/tv_clock"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginLeft="3dp"
             android:gravity="center_horizontal|center_vertical"
+            android:layout_centerVertical="true"
             android:textColor="#000000"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -41,7 +42,7 @@
             android:layout_marginLeft="50dp"
             android:layout_toRightOf="@+id/tv_clock"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
             android:text="开"
             android:id="@+id/alarm_open"
             android:layout_centerVertical="true"
@@ -54,7 +55,7 @@
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/alarm_open"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
             android:text="关"
             android:id="@+id/alarm_close"
             android:layout_centerVertical="true"
@@ -65,18 +66,19 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         >
 
         <TextView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="权限"
             android:id="@+id/tv_power"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginLeft="3dp"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="#000000"
@@ -87,7 +89,7 @@
             android:layout_marginLeft="50dp"
             android:layout_toRightOf="@+id/tv_power"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
             android:text="开"
             android:id="@+id/light_open"
             android:layout_centerVertical="true"
@@ -99,7 +101,7 @@
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/light_open"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="36dp"
             android:text="关"
             android:id="@+id/light_close"
             android:layout_centerVertical="true"
@@ -120,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="亮灯选择"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:id="@+id/tv_light"
             android:layout_marginLeft="3dp"
             android:gravity="center_horizontal|center_vertical"
@@ -141,39 +143,52 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:orientation="horizontal"
         >
 
         <Button
             android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="48dp"
-            android:text="测试灯"
+            android:text="试灯"
             android:id="@+id/test"
-            android:layout_centerHorizontal="true"
             android:background="@drawable/login_bg_press"
             android:textColor="#010900"
             android:textSize="16sp"
             />
         <Button
-            android:layout_below="@+id/test"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="48dp"
             android:text="查询"
             android:id="@+id/search"
-            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_bg_press"
+            android:textColor="#010900"
+            android:textSize="16sp"
+            />
+        <Button
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:text="拨号"
+            android:id="@+id/call"
             android:background="@drawable/login_bg_press"
             android:textColor="#010900"
             android:textSize="16sp"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

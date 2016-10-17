@@ -24,15 +24,25 @@ public class MsgSender {
     public void send(ArrayList<String> numbers, String message){
         if (numbers.size()!=0){
             Toast.makeText(context,"短信发送中...",Toast.LENGTH_SHORT).show();
-
             for (String number:numbers) {
                 String SENT = "sms_sent";
                 String DELIVERED = "sms_delivered";
+                SmsManager smsm = SmsManager.getDefault();
                 PendingIntent sentPI = PendingIntent.getActivity(context, 0, new Intent(SENT), 0);
                 PendingIntent deliveredPI = PendingIntent.getActivity(context, 0, new Intent(DELIVERED), 0);
+                if (message.length()>70){
+                    ArrayList<String> msgs = smsm.divideMessage(message);
+                    ArrayList<PendingIntent> sentIntents =  new ArrayList<PendingIntent>();
+                    for(int i = 0;i<msgs.size();i++){
+                        sentIntents.add(sentPI);
+                    }
+                    smsm.sendMultipartTextMessage(number, null, msgs, sentIntents, null);
+                }else{
 
-                SmsManager smsm = SmsManager.getDefault();
-                smsm.sendTextMessage(number, null, message, sentPI, deliveredPI);
+                    smsm.sendTextMessage(number, null, message, sentPI, deliveredPI);
+                }
+
+
             }
         }else{
             Toast.makeText(context,"请输入手机号码",Toast.LENGTH_SHORT).show();

@@ -98,13 +98,13 @@
             android:max="99"
             android:id="@+id/sb_light_time"
             />
-
-
     </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         >
@@ -120,6 +120,92 @@
             android:textSize="16sp"
             />
     </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="读速度"
+                    android:textSize="16sp"
+                    android:id="@+id/tv_read_speed"
+                    android:layout_marginLeft="3dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/tv_read_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:id="@+id/tv_read_speed_true"
+                    android:layout_marginLeft="3dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textColor="#000000" />
+                <SeekBar
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/tv_read_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:progress="1"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#010900"
+                    android:textSize="30px"
+                    android:max="9"
+                    android:id="@+id/sb_read_speed"
+                    />
+                <RelativeLayout
+                    android:layout_below="@+id/sb_read_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    >
+                    <TextView
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="慢"
+
+                        android:textColor="#000000"
+                        />
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快"
+
+                        android:textColor="#000000"
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="设置"
+                    android:id="@+id/send_readspeed"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/login_bg_press"
+                    android:textColor="#010900"
+                    android:textSize="16sp"
+                    />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

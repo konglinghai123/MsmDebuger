@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -81,7 +82,7 @@ public class HomeFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
-        sbLightSpeed.setMax(9);
+        sbLightSpeed.setMax(99);
         sbLightSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -118,6 +119,14 @@ public class HomeFragment extends Fragment {
             }
         });
         color=((RadioButton)(rgColor.findViewById(rgColor.getCheckedRadioButtonId()))).getText().toString();
+
+        context.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
         return view;
     }
 

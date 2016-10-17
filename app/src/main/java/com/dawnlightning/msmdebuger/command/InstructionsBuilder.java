@@ -87,4 +87,8 @@ public class InstructionsBuilder implements InstructionBuilderInterface{
     public String Search(){
         return Instructions.SEARCH;
     }
+
+    public String SetReadSpeed(String speed){
+        return String.format(Instructions.READ,speed);
+    }
 }

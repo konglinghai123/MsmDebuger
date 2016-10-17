@@ -1,6 +1,8 @@
 package com.dawnlightning.msmdebuger.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,6 +49,8 @@ public class MineFragment extends Fragment {
     Button lightClose;
     @Bind(R.id.search)
     Button search;
+    @Bind(R.id.call)
+    Button call;
     private LightAdapter lightAdapter;
     private MsgSender sender;
     private InstructionsBuilder builder;
@@ -99,8 +103,18 @@ public class MineFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+    private void call(ArrayList<String> list){
+          if (list.size()>0){
+              //这里"tel:"+电话号码 是固定格式，系统一看是以"tel:"开头的，就知道后面应该是电话号码。
+              Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + list.get(0).trim()));
+              startActivity(intent);//调用上面这个intent实现拨号
+          }else{
+              mainActivity.TosatShow("请添加号码");
+          }
 
-    @OnClick({R.id.test,R.id.alarm_open, R.id.alarm_close, R.id.light_open, R.id.light_close, R.id.search})
+
+    }
+    @OnClick({R.id.test,R.id.alarm_open, R.id.alarm_close, R.id.light_open, R.id.light_close, R.id.search,R.id.call})
     public void onClick(View view) {
          ArrayList<String> phone=mainActivity.phonelist;
 
@@ -123,6 +137,10 @@ public class MineFragment extends Fragment {
                 case R.id.test:
                     sender.send(phone, builder.Test());
                     break;
+                case R.id.call:
+                    call(mainActivity.getPhonelist());
+                    break;
+
             }
 
     }

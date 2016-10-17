@@ -19,4 +19,5 @@ public interface InstructionBuilderInterface {
     String OpenPowerContorl();
     String ClosePowerContorl();
     String SetAddress(String address);
+    String SetReadSpeed(String speed);
 }

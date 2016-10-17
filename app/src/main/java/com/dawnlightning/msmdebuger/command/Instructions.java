@@ -55,4 +55,6 @@ public class Instructions {
     public static String SETADDRESS="设地址*%s#";
 
     public static String SEARCH="查询#";
+
+    public static String READ="速度*%s#";
 }
