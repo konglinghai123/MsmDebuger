@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.dawnlightning.msmdebuger.MainActivity;
@@ -39,6 +40,12 @@ public class LightFragment extends Fragment {
     SeekBar sbLightTime;
     @Bind(R.id.send)
     Button send;
+    @Bind(R.id.tv_read_speed_true)
+    TextView read_speed;
+    @Bind(R.id.sb_read_speed)
+    SeekBar sbReadspeed;
+    @Bind(R.id.send_readspeed)
+    Button send_readspeed;
     private MsgSender sender;
     private InstructionsBuilder builder;
     private MainActivity mainActivity;
@@ -101,6 +108,23 @@ public class LightFragment extends Fragment {
 
             }
         });
+        read_speed.setText(String.valueOf(1));
+        sbReadspeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                read_speed.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         return view;
     }
 
@@ -110,11 +134,19 @@ public class LightFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.send)
-    public void onClick() {
+    @OnClick({R.id.send,R.id.send_readspeed})
+    public void onClick(View view) {
         ArrayList<String> phone=mainActivity.getPhonelist();
+        switch(view.getId()) {
+            case R.id.send:
 
-        sender.send(phone,builder.SetLightSpeedAndTimes(tvLightSpeedTrue.getText().toString(),tvLightTimeTrue.getText().toString().replaceAll("分钟","")));
+                sender.send(phone,builder.SetLightSpeedAndTimes(tvLightSpeedTrue.getText().toString(),tvLightTimeTrue.getText().toString().replaceAll("分钟","")));
+                break;
+            case R.id.send_readspeed:
+                sender.send(phone,builder.SetReadSpeed(read_speed.getText().toString()));
+                break;
+
+        }
 
     }
 }
