@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dawnlightning.msmdebuger.Utils;
+package com.dawnlightning.msmdebuger.utils;
 
 import android.text.TextUtils;
 import android.util.Log;

@@ -57,4 +57,6 @@ public class Instructions {
     public static String SEARCH="查询#";
 
     public static String READ="速度*%s#";
+
+    public static String STOP="停止*#";
 }

@@ -1,4 +1,4 @@
-package com.dawnlightning.msmdebuger.Receiver;
+package com.dawnlightning.msmdebuger.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

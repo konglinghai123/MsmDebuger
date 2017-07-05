@@ -15,12 +15,16 @@
  */
 package com.dawnlightning.msmdebuger.bean;
 
+import android.text.TextUtils;
+
+import java.io.Serializable;
+
 /**
  * 联系人javabean
  *
  * @author kymjs (http://www.kymjs.com/) on 9/16/15.
  */
-public class Contact implements Comparable<Contact> {
+public class Contact implements Comparable<Contact>,Serializable {
     private String name;
     private int id;
     private String number;
@@ -42,12 +46,15 @@ public class Contact implements Comparable<Contact> {
 
     public void setPinyin(String pinyin) {
         this.pinyin = pinyin;
-        String first = pinyin.substring(0, 1);
-        if (first.matches("[A-Za-z]")) {
-            firstChar = first.toUpperCase().charAt(0);
-        } else {
-            firstChar = '#';
+        if (!TextUtils.isEmpty(pinyin)){
+            String first = pinyin.substring(0, 1);
+            if (first.matches("[A-Za-z]")) {
+                firstChar = first.toUpperCase().charAt(0);
+            } else {
+                firstChar = '#';
+            }
         }
+
     }
 
     public String getName() {

@@ -23,31 +23,25 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.ContactsContract;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-import com.dawnlightning.msmdebuger.Utils.HanziToPinyin;
+import com.dawnlightning.msmdebuger.utils.HanziToPinyin;
 import com.dawnlightning.msmdebuger.adapter.ContactAdapter;
 import com.dawnlightning.msmdebuger.bean.Contact;
 import com.dawnlightning.msmdebuger.widget.SideBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -170,12 +164,7 @@ public class ContactActivity extends Activity implements SideBar
             @Override
             public void onClick(View v) {
                 Intent mIntent = new Intent();
-                ArrayList<String> list=new ArrayList<String>();
-                for(int i=0;i< mAdapter.getSelectDatas().size();i++){
-                    list.add(mAdapter.getSelectDatas().get(i).getNumber());
-                }
-
-                mIntent.putStringArrayListExtra("phonelist",list);
+                mIntent.putExtra("phonelist",(Serializable) mAdapter.getSelectDatas());
                 setResult(RESULTCODE, mIntent);
                 finish();
             }

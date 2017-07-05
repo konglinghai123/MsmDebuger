@@ -1,4 +1,4 @@
-package com.dawnlightning.msmdebuger.Utils;
+package com.dawnlightning.msmdebuger.utils;
 
 import android.text.TextUtils;
 

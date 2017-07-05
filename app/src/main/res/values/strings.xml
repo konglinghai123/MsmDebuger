@@ -2,7 +2,7 @@
     <string name="app_name">短信助手</string>
     <string name="trends">主页</string>
     <string name="mine">控制</string>
-    <string name="phone">目标手机号码</string>
+    <string name="phone">手机号码</string>
     <string name="times">请输入报警次数</string>
     <string name="command">请输入内容</string>
     <string name="login">发送</string>

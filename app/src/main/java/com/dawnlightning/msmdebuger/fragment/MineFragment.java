@@ -1,23 +1,16 @@
 package com.dawnlightning.msmdebuger.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.dawnlightning.msmdebuger.MainActivity;
 import com.dawnlightning.msmdebuger.R;
-import com.dawnlightning.msmdebuger.Utils.Mobile;
 import com.dawnlightning.msmdebuger.adapter.LightAdapter;
 import com.dawnlightning.msmdebuger.command.InstructionsBuilder;
 import com.dawnlightning.msmdebuger.command.MsgSender;
@@ -27,6 +20,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.gujun.android.taggroup.TagGroup;
 
 /**
  * 作者：Administrator on 2016/10/4 15:29
@@ -37,20 +31,10 @@ public class MineFragment extends Fragment {
 
     @Bind(R.id.listlight)
     ListView listlight;
-    @Bind(R.id.test)
-    Button test;
-    @Bind(R.id.alarm_open)
-    Button alarmOpen;
-    @Bind(R.id.alarm_close)
-    Button alarmClose;
-    @Bind(R.id.light_open)
-    Button lightOpen;
-    @Bind(R.id.light_close)
-    Button lightClose;
-    @Bind(R.id.search)
-    Button search;
-    @Bind(R.id.call)
-    Button call;
+    @Bind(R.id.tag_group)
+    TagGroup tagGroup;
+
+
     private LightAdapter lightAdapter;
     private MsgSender sender;
     private InstructionsBuilder builder;
@@ -77,16 +61,16 @@ public class MineFragment extends Fragment {
         lightAdapter = new LightAdapter(getActivity(), new LightAdapter.Action() {
             @Override
             public void open(String color) {
-                 ArrayList<String> phone=mainActivity.phonelist;
+                ArrayList<String> phone = mainActivity.phonelist;
 
-                    sender.send(phone, builder.OpenLight(color));
+                sender.send(phone, builder.OpenLight(color));
 
 
             }
 
             @Override
             public void close(String color) {
-                 ArrayList<String> phone=mainActivity.phonelist;
+                ArrayList<String> phone = mainActivity.phonelist;
 
                 sender.send(phone, builder.CloseLight(color));
 
@@ -94,6 +78,14 @@ public class MineFragment extends Fragment {
             }
         });
         listlight.setAdapter(lightAdapter);
+        tagGroup.setTags(mainActivity.phonelist);
+        tagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
+            @Override
+            public void onTagClick(String tag) {
+                mainActivity.phonelist.remove(tag);
+                tagGroup.setTags(mainActivity.phonelist);
+            }
+        });
         return view;
     }
 
@@ -103,45 +95,35 @@ public class MineFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    private void call(ArrayList<String> list){
-          if (list.size()>0){
-              //这里"tel:"+电话号码 是固定格式，系统一看是以"tel:"开头的，就知道后面应该是电话号码。
-              Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + list.get(0).trim()));
-              startActivity(intent);//调用上面这个intent实现拨号
-          }else{
-              mainActivity.TosatShow("请添加号码");
-          }
+    @OnClick({R.id.test, R.id.alarm_open, R.id.alarm_close, R.id.light_open, R.id.light_close, R.id.search})
+    public void onClick(View view) {
+        ArrayList<String> phone = mainActivity.phonelist;
+        switch (view.getId()) {
+            case R.id.alarm_open:
+                sender.send(phone, builder.OpenAlarm());
+                break;
+            case R.id.alarm_close:
+                sender.send(phone, builder.ColseAlarm());
+                break;
+            case R.id.light_open:
+                sender.send(phone, builder.OpenPowerContorl());
+                break;
+            case R.id.light_close:
+                sender.send(phone, builder.ClosePowerContorl());
+                break;
+            case R.id.search:
+                sender.send(phone, builder.Search());
+                break;
+            case R.id.test:
+                sender.send(phone, builder.Test());
+                break;
 
+        }
 
     }
-    @OnClick({R.id.test,R.id.alarm_open, R.id.alarm_close, R.id.light_open, R.id.light_close, R.id.search,R.id.call})
-    public void onClick(View view) {
-         ArrayList<String> phone=mainActivity.phonelist;
-
-            switch (view.getId()) {
-                case R.id.alarm_open:
-                    sender.send(phone, builder.OpenAlarm());
-                    break;
-                case R.id.alarm_close:
-                    sender.send(phone, builder.ColseAlarm());
-                    break;
-                case R.id.light_open:
-                    sender.send(phone, builder.OpenPowerContorl());
-                    break;
-                case R.id.light_close:
-                    sender.send(phone, builder.ClosePowerContorl());
-                    break;
-                case R.id.search:
-                    sender.send(phone, builder.Search());
-                    break;
-                case R.id.test:
-                    sender.send(phone, builder.Test());
-                    break;
-                case R.id.call:
-                    call(mainActivity.getPhonelist());
-                    break;
-
-            }
-
+    public void RestTag(){
+        if (tagGroup!=null){
+            tagGroup.setTags(mainActivity.phonelist);
+        }
     }
 }

@@ -1,5 +1,9 @@
 package com.dawnlightning.msmdebuger.command;
 
+import android.util.Log;
+
+import com.dawnlightning.msmdebuger.utils.BaseTools;
+
 import java.util.List;
 
 /**
@@ -14,6 +18,11 @@ public class InstructionsBuilder implements InstructionBuilderInterface{
 
     @Override
     public String ReadContext(String times, String color, String context) {
+        if ((Integer.parseInt(times))<0){
+            times="0"+times;
+        }
+        context=BaseTools.ToDBC(context);
+        context= BaseTools.big5ToChinese(context).replaceAll("、",",");
         return String.format(Instructions.CONTEXT, times,color,context);
     }
 
@@ -89,6 +98,10 @@ public class InstructionsBuilder implements InstructionBuilderInterface{
     }
 
     public String SetReadSpeed(String speed){
+
         return String.format(Instructions.READ,speed);
+    }
+    public String Stop(){
+        return Instructions.STOP;
     }
 }
